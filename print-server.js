@@ -933,8 +933,8 @@ const impresionesService = new ImpresionesService();
 // Endpoints
 app.post('/print/precuenta', async (req, res) => {
     try {
-        const { data, printerIp } = req.body;
-        const result = await impresionesService.printPreCuenta(data, printerIp);
+        const { data  } = req.body;
+        const result = await impresionesService.printPreCuenta(data.data, data.printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -943,8 +943,8 @@ app.post('/print/precuenta', async (req, res) => {
 
 app.post('/print/comanda', async (req, res) => {
     try {
-        const { data, printerIp } = req.body;
-        const result = await impresionesService.imprimirComanda(data, printerIp);
+        const { data  } = req.body;
+        const result = await impresionesService.imprimirComanda(data.data, data.printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -953,8 +953,8 @@ app.post('/print/comanda', async (req, res) => {
 
 app.post('/print/cierre-caja', async (req, res) => {
     try {
-        const { data, con_detalle, printerIp } = req.body;
-        const result = await impresionesService.imprimirCierreCaja(data, con_detalle, printerIp);
+        const { data  } = req.body;
+        const result = await impresionesService.imprimirCierreCaja(data.data, data.con_detalle, data.printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -964,7 +964,6 @@ app.post('/print/cierre-caja', async (req, res) => {
 app.post('/print/cierre-diario', async (req, res) => {
     try {
         const { data  } = req.body;
-        console.log(data)
         const result = await impresionesService.imprimirCierreDiario(data.data, data.printerIp);
         res.json(result);
     } catch (error) {
@@ -974,8 +973,8 @@ app.post('/print/cierre-diario', async (req, res) => {
 
 app.post('/print/anulados', async (req, res) => {
     try {
-        const { data, printerIp } = req.body;
-        const result = await impresionesService.printOrdenAnulados(data, printerIp);
+        const { data  } = req.body;
+        const result = await impresionesService.printOrdenAnulados(data.data, data.printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -984,8 +983,8 @@ app.post('/print/anulados', async (req, res) => {
 
 app.post('/print/factura-electronica', async (req, res) => {
     try {
-        const { data, printerIp } = req.body;
-        const result = await impresionesService.printFacturaElectronica(data, printerIp);
+        const { data  } = req.body;
+        const result = await impresionesService.printFacturaElectronica(data.data, data.printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
