@@ -1,0 +1,17 @@
+# Ignora los paquetes npm
+node_modules/
+package-lock.json
+
+# Ignora archivos minificados y relacionados con la compilación
+*.min.js
+*.map
+*.atom
+*.vscode
+
+# Ignora archivos de configuración específicos (podrías agregar tus propios)
+.env
+.env.local
+.DS_Store
+
+# Ignora los archivos de log
+*.log
