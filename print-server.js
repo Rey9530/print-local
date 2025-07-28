@@ -405,6 +405,18 @@ class ImpresionesService {
                 printer.alignRight();
                 printer.println(`$ ${data.totalCertificado}`);
             }
+            if (data.bitcoinReal > 0) {
+                printer.alignLeft();
+                printer.println(`BITCOIN`);
+                printer.alignRight();
+                printer.println(`$ ${data.bitcoinReal}`);
+            }
+            if (data.transferenciaReal > 0) {
+                printer.alignLeft();
+                printer.println(`TRANSFERENCIA`);
+                printer.alignRight();
+                printer.println(`$ ${data.transferenciaReal}`);
+            }
 
             if (data.totalCredito > 0) {
                 printer.alignLeft();
@@ -603,12 +615,31 @@ class ImpresionesService {
                 printer.alignRight();
                 printer.println(`$ ${data.cortesia.toFixed(2)}`);
             }
+            if (data.bitcoinReal > 0) {
+                printer.alignLeft();
+                printer.println('BITCOIN ');
+                printer.alignRight();
+                printer.println(`$ ${data.bitcoinReal.toFixed(2)}`);
+            }
+            if (data.cortesia > 0) {
+                printer.alignLeft();
+                printer.println('CORTESÍA');
+                printer.alignRight();
+                printer.println(`$ ${data.cortesia.toFixed(2)}`);
+            }
 
             if (data.certificadoRegalo > 0) {
                 printer.alignLeft();
                 printer.println('CERTIFICADO REGALO');
                 printer.alignRight();
                 printer.println(`$ ${data.certificadoRegalo.toFixed(2)}`);
+            }
+
+            if (data.transferencia > 0) {
+                printer.alignLeft();
+                printer.println('TRANSFERENCIA');
+                printer.alignRight();
+                printer.println(`$ ${data.transferencia.toFixed(2)}`);
             }
 
             if (data.foundever > 0) {
