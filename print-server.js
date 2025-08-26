@@ -985,8 +985,8 @@ app.post('/print/comanda', async (req, res) => {
 
 app.post('/print/cierre-caja', async (req, res) => {
     try {
-        const { data  } = req.body;
-        const result = await impresionesService.imprimirCierreCaja(data.data, data.con_detalle, data.printerIp);
+        const { data, con_detalle, printerIp  } = req.body;
+        const result = await impresionesService.imprimirCierreCaja(data, con_detalle, printerIp);
         res.json(result);
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
