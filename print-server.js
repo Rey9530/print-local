@@ -507,6 +507,7 @@ class ImpresionesService {
             printer.alignCenter();
             printer.setTextSize(1, 1);
             printer.println('CIERRE DIARIO');
+            printer.println(data.nombre_sistema);
             printer.setTextSize(0, 0);
             printer.println(fecha_cierre);
             printer.drawLine();
@@ -889,21 +890,26 @@ class ImpresionesService {
             data.cuerpoDocumento.forEach(item => {
                 const preciosTotal = item.ventaGravada > 0 ? item.ventaGravada : item.ventaExenta;
                 if (item.codigo != "0000") {
+                    const precioUnitario = item.noGravado>0? item.noGravado.toString() :item.precioUni.toString();
+                    const precioTotal = item.noGravado>0? item.noGravado.toString() :preciosTotal.toString();
                     printer.tableCustom([
                         { text: item.cantidad.toString(), width: 0.1, align: 'CENTER' },
                         { text: item.descripcion, width: 0.4, align: 'LEFT' },
-                        { text: item.precioUni.toString(), width: 0.2, align: 'RIGHT' },
-                        { text: preciosTotal.toString(), width: 0.2, align: 'RIGHT' }
+                        { text: precioUnitario, width: 0.2, align: 'RIGHT' },
+                        { text: precioTotal + (item.noGravado > 0 ? " NG" : " G"), width: 0.2, align: 'RIGHT' }
                     ]);
                 }
             });
 
-            printer.drawLine();
-
+            printer.drawLine(); 
+            
+            printer.bold(true);
+            printer.println(`NG= No Gravado  G= Gravado`);
+            printer.bold(false);
             // Totales
             printer.alignRight();
             printer.println(`Subtotal: $${data.resumen.subTotalVentas}`);
-            printer.println(`Propina: $${data.resumen.totalNoGravado}`);
+            printer.println(`Subtotal no grabado: $${data.resumen.totalNoGravado}`);
             if (data.resumen.descuGravada > 0) {
                 printer.println(`Descuento: $${data.resumen.descuGravada}`);
             }
@@ -919,6 +925,15 @@ class ImpresionesService {
             printer.println(`TOTAL: $${data.resumen.totalPagar}`);
             printer.setTextSize(0, 0);
             printer.bold(false);
+
+            printer.drawLine();
+            
+            data.metodosPago.forEach(item => { 
+                printer.tableCustom([ 
+                    { text: item.tipo_pago + (item.pos ? ' (' + item.pos + ')' : ''), width: 0.4, align: 'LEFT' }, 
+                    { text: "$"+item.monto.toString(), width: 0.5, align: 'RIGHT' }
+                ]);
+            });
 
             printer.drawLine();
 
