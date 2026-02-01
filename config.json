@@ -1,0 +1,8 @@
+{
+  "printer": {
+    "vendor_id": "0x1fc9",
+    "product_id": "0x2016",
+    "name": "POS-80"
+  },
+  "port": 3003
+}
